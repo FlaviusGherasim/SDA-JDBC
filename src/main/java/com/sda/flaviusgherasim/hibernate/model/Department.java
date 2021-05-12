@@ -1,2 +1,45 @@
-package com.sda.flaviusgherasim.hibernate.model;public class Department {
+package com.sda.flaviusgherasim.hibernate.model;
+
+import javax.persistence.*;
+import java.util.List;
+
+@Entity
+@Table(name = "departments") // mandatory - singular vs plural
+public class Department
+{
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id") // optional - identical names
+    private Integer id;
+    @Column(name = "name") // optional - identical names
+    private String name;
+
+    @OneToMany(mappedBy = "department")
+    private List<Employee> employeeList;
+
+    public Integer getId()
+    {
+        return id;
+    }
+    public void setId(Integer id)
+    {
+        this.id = id;
+    }
+    public String getName()
+    {
+        return name;
+    }
+    public void setName(String name)
+    {
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "Department{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", employeeList=" + employeeList +
+                '}';
+    }
 }
